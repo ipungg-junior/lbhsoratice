@@ -12,7 +12,7 @@ jadi disini folder kerja njenengan ada 2 yang utama
 Di folder ini nanti njenengan taro file html nya, disesuaikan filenya dengan struktur folder nya..
 misal landing ya brarti di folder landing, html blog ya di folder blog ngunu.
 Niki contoh strukture : 
-
+```
 ++ blog/
 |   ++ templates/
 |   |   ++ base/
@@ -22,13 +22,14 @@ Niki contoh strukture :
 |   |   ++ blog/
 |   |   |       -- blog-list.html
 |   |   |       -- blog-detail.html
+```
 
 Selengkapnya di dalam folder templates ada panduannya untuk html...
 
 ### Folder static/  ->  css/js file
 Untuk folder static ini berisi seluruh css dan js yang akan digunakan web.
 Jadi semua file ditaruh sesuai foldernya aja. tinggal di call dari htmlnya.
-
+```
 ++ static/
 |   ++ css/
 |   |       -- contoh.css
@@ -37,7 +38,7 @@ Jadi semua file ditaruh sesuai foldernya aja. tinggal di call dari htmlnya.
 |   ++ img/
 |   |       -- logo.ico
 |   |       -- logo.png
-
+```
 .
 .
 .
