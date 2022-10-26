@@ -54,3 +54,8 @@ Jadi semua file ditaruh sesuai foldernya aja. tinggal di call dari htmlnya.
 * 7. __push ke repo kamu, git push origin frontend__
 * 8. __Buka repo km di web github, klik Contribute make pull request__
 * 9. __beritahu saya via wasap__
+
+NB :
+Njenengan bisa run di komputer lokal kalo ada python sm django 4.0
+bisa di eksekusi di komputer lokal menjadi nilai tambah :)
+soalnya untuk static file harus di collectstatic dulu supaya masuk ke htmlnya (istilahnya di copy ke folder root)
