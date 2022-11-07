@@ -1,0 +1,326 @@
+{% extends 'base/base.html' %}
+{%load static%}
+
+
+{% block head %}
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#000000" />
+<link rel="shortcut icon" href="./assets/img/favicon.ico" />
+<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="{% static 'css/compiled-tailwind/compiled-tailwind.min.css' %}" />
+<title>LBH Solo | Dashboard</title>
+{% endblock %}
+
+
+{% block body %}
+
+<body class="text-blueGray-700 antialiased">
+
+    <div id="root">
+        <nav class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+            <div
+                class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
+                <button
+                    class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+                    type="button" onclick="toggleNavbar('example-collapse-sidebar')">
+                    <i class="fas fa-bars"></i></button>
+                <a class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
+                    Dashboard
+                </a>
+                <div class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded hidden"
+                    id="example-collapse-sidebar">
+                    <div class="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
+                        <div class="flex flex-wrap">
+                            <div class="w-6/12">
+                                <a class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
+                                    Dashboard
+                                </a>
+                            </div>
+                            <div class="w-6/12 flex justify-end">
+                                <button type="button"
+                                    class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+                                    onclick="toggleNavbar('example-collapse-sidebar')">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+                        <li class="items-center mb-3">
+                            <a class="text-amber-500 hover:text-amber-800 text-sm font-bold" href="#/dashboard">
+                            <i class="fas fa-tv opacity-75 text-base mr-2"></i>
+                            Dashboard</a>
+                        </li>
+                        <li class="items-center mb-3">
+                            <a class="text-blueGray-700 hover:text-blueGray-500 text-sm font-bold" href="#/dashboard">
+                            <i class="fas fa-paint-brush text-blueGray-400 text-base mr-3"></i>
+                            Buat Berita</a>
+                        </li>
+                        <li class="items-center mb-3">
+                            <a class="text-blueGray-700 hover:text-blueGray-500 text-sm font-bold" href="#/dashboard">
+                            <i class="fas fa-camera text-blueGray-400 text-base mr-3"></i>
+                            Gambar Banner</a>
+                        </li>
+                        <hr class="mb-2"> 
+                        <li class="items-center mb-3">
+                            <a class="text-red-700 hover:text-blueGray-500 text-sm font-bold" href="#/dashboard">
+                            <i class="fas fa-window-close text-red-400 text-base mr-3"></i>
+                            Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="relative md:ml-64 bg-blueGray-50">
+            <!-- Header -->
+            <div class="relative bg-amber-500 md:pt-12 pb-32 pt-12">
+                <div class="px-4 md:px-10 mx-auto w-full">
+                    <div>
+
+                        <!-- Jumlah Pengunjung -->
+                        <div class="flex flex-wrap">
+
+                            <div class="w-full lg:w-6/12 xl:w-3/12 px-4 h-25">
+                                <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-25">
+                                    <div class="flex p-4">
+                                        <div class="flex flex-1">
+                                            <div class="relative w-full pr-4 max-w-full flex flex-col">
+                                                <h5 class="text-blueGray-400 uppercase font-bold text-xs">
+                                                    Pengunjung Minggu Ini
+                                                </h5>
+                                                <span class="font-semibold text-xl text-blueGray-700">
+                                                    12
+                                                </span>
+                                            </div>
+                                            <div class="relative w-auto pl-4 flex-initial">
+                                                <div
+                                                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-red-500">
+                                                    <i class="fas fa-users"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Jumlah Article -->
+                            <div class="w-full lg:w-6/12 xl:w-3/12 px-4 h-25">
+                                <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-25">
+                                    <div class="flex p-4">
+                                        <div class="flex flex-1">
+                                            <div class="relative w-full pr-4 max-w-full flex flex-col">
+                                                <h5 class="text-blueGray-400 uppercase font-bold text-xs">
+                                                    Article
+                                                </h5>
+                                                <span class="font-semibold text-xl text-blueGray-700">
+                                                    4
+                                                </span>
+                                            </div>
+                                            <div class="relative w-auto pl-4 flex-initial">
+                                                <div
+                                                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-blue-500">
+                                                    <i class="fas fa-newspaper"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-4 md:px-10 mx-auto w-full -m-24">
+                <div class="flex flex-wrap mt-4">
+                    <div class="w-full mb-12 xl:mb-0 px-4">
+                        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                            <div class="rounded-t mb-0 px-4 py-3 border-0">
+                                <div class="flex flex-wrap items-center">
+                                    <div class="relative w-full max-w-full flex-grow flex-1">
+                                        <h3 class="font-semibold text-base text-blueGray-700">
+                                            Daftar Artikel
+                                        </h3>
+                                    </div>
+                                    <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                                        <a class="text-base font-semibold">4</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block w-full overflow-x-auto overflow-y-scroll">
+                                <!-- Projects table -->
+                                <table class="items-center w-full bg-transparent border-collapse">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                Judul
+                                            </th>
+                                            <th
+                                                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                Total Dilihat
+                                            </th>
+                                            <th
+                                                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                Tanggal Upload
+                                            </th>
+                                            <th
+                                                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                                Bounce rate
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <!-- LOOP ARTICLE HERE -->
+                                        <tr>
+                                            <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                Pengaruh Alkohol terhadap tubuh
+                                            </th>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                26
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                12/10/2022
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
+                                                46,53%
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                /argon/index.html
+                                            </th>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                3,985
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                319
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
+                                                46,53%
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                /argon/charts.html
+                                            </th>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                3,513
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                294
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
+                                                36,49%
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                /argon/tables.html
+                                            </th>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                2,050
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                147
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
+                                                50,87%
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                /argon/profile.html
+                                            </th>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                1,795
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                190
+                                            </td>
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                <i class="fas fa-arrow-down text-red-500 mr-4"></i>
+                                                46,53%
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+                <footer class="block py-4">
+                    <div class="container mx-auto px-4">
+                        <hr class="mb-4 border-b-1 border-blueGray-200" />
+                        <div class="flex flex-wrap items-center md:justify-between justify-center">
+                            <div class="w-full md:w-4/12 px-4">
+                                <div class="text-sm text-blueGray-500 font-semibold py-1">
+                                    Copyright © <span id="javascript-date"></span>
+                                    <a class="text-blueGray-500 hover:text-blueGray-700 text-sm font-semibold py-1">
+                                        LBH Soloraya
+                                    </a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        /* Sidebar - Side navigation menu on mobile/responsive mode */
+        function toggleNavbar(collapseID) {
+            document.getElementById(collapseID).classList.toggle("hidden");
+            document.getElementById(collapseID).classList.toggle("bg-white");
+            document.getElementById(collapseID).classList.toggle("m-2");
+            document.getElementById(collapseID).classList.toggle("py-3");
+            document.getElementById(collapseID).classList.toggle("px-6");
+        }
+        /* Function for dropdowns */
+        function openDropdown(event, dropdownID) {
+            let element = event.target;
+            while (element.nodeName !== "A") {
+                element = element.parentNode;
+            }
+            var popper = Popper.createPopper(element, document.getElementById(dropdownID), {
+                placement: "bottom-end"
+            });
+            document.getElementById(dropdownID).classList.toggle("hidden");
+            document.getElementById(dropdownID).classList.toggle("block");
+        }
+    </script>
+</body>
+{% endblock %}
