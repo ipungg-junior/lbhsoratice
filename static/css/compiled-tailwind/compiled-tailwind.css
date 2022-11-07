@@ -2496,6 +2496,10 @@ select {
   height: 4rem;
 }
 
+.h-25 {
+  height: 6rem;
+}
+
 .h-auto {
   height: auto;
 }
@@ -4028,6 +4032,11 @@ select {
 .hover\:text-blueGray-800:hover {
   --tw-text-opacity: 1;
   color: rgba(30, 41, 59, var(--tw-text-opacity));
+}
+
+.hover\:text-amber-800:hover {
+  --tw-text-opacity: 1;
+  color: rgba(146, 64, 14, var(--tw-text-opacity));
 }
 
 .truncate {
