@@ -11,8 +11,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <link rel="stylesheet" href="{% static 'css/compiled-tailwind/compiled-tailwind.min.css' %}" />
 <!-- SUMMERNOTE JS bs 4-->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <title>LBH Solo | Dashboard</title>
 {% endblock %}
 
@@ -94,7 +98,7 @@
                                 <div class="flex flex-wrap items-center">
                                     <div class="relative w-full max-w-full flex-grow flex-1">
                                         <h3 class="font-semibold text-base text-blueGray-700">
-                                            Upload Article Baru
+                                            Sunting Article
                                         </h3>
                                     </div>
                                 </div>
@@ -105,20 +109,15 @@
                                     <!-- image upload -->
                                     <div
                                         class="flex relative bg-blueGray-500 lg:w-6/12 mx-auto h-40 mb-3 justify-center items-center rounded">
-                                        <img id="file-image" src="#" alt=""
-                                            style="width: 100%; height: 100%; z-index: 2;" class="absolute">
+                                        <img id="file-image" src="/media/{{article.img}}" alt=""
+                                            style="width: 100%; height: 100%; z-index: 2; background-size: cover;" class="absolute">
                                         <div class="flex w-full h-40 justify-center" class="absolute"
                                             style="z-index: 3;">
                                             <input id="image-upload" type="file" accept="image/*" class="w-full h-40"
                                                 style="cursor: pointer; position: absolute; z-index: 4;opacity: 0;" />
-                                            <i id="icon-download" class="fas fa-download absolute self-center text-white"></i>
-                                            <a id="caption-download" class="text-base font-semibold absolute self-center mt-12 text-white">Upload
-                                                Gambar</a>
                                         </div>
                                         <script>
                                             let img = document.getElementById('image-upload');
-                                            let icon = document.getElementById('icon-download');
-                                            let captionIcon = document.getElementById('caption-download');
                                             img.onchange = uploadHandler;
                                             function uploadHandler() {
                                                 const [file] = img.files;
@@ -126,8 +125,6 @@
                                                     document.getElementById('file-image').src = URL.createObjectURL(file);
                                                     document.getElementById('file-image').onload = function () {
                                                         URL.revokeObjectURL(document.getElementById('file-image').src) // free memory
-                                                        icon.style.display = "none";
-                                                        captionIcon.style.display = "none";
                                                     }
                                                 }
                                             }
@@ -135,16 +132,16 @@
 
                                     </div>
                                     <!-- Title -->
+
                                     <div class="lg:w-full mt-5">
-                                        <input id="input-title" type="text" placeholder="Judul Article . . ."
-                                            class="shadow-lg" style="text-decoration: none;
+                                        <input id="input-title" type="text" placeholder="" class="shadow-lg" style="text-decoration: none;
                                         height: 35px;
                                         width: 100%;
                                         border: none;
                                         border-color: none;
                                         border-radius: 4px;
                                         outline: solid 1px;
-                                        outline-color: rgb(213, 212, 212);">
+                                        outline-color: rgb(213, 212, 212);" value="{{article.title}}">
                                         <script>
                                             const inpTitle = document.getElementById('input-title');
                                             inpTitle.onclick = changeBold;
@@ -157,35 +154,46 @@
 
                                 <div class="w-full h-12 p-4">
                                     {%csrf_token%}
-                                    <!-- SUMMERNOTE TAG -->
-                                    {{contentForm.content}}
-                                    <!-- END SUMMERNOTE -->
+                                    <!-- SUmmernote -->
+                                    <div id="editor" style="height: 32em;">
+                                        {{article.content | safe}}
+                                    </div>
 
+                                    <!-- Button simpan -->
                                     <div class="flex w-full justify-center items-center mt-3" id="button-posting">
                                         <a class="text-white text-sm font-bold bg-amber-500 p-3 rounded cursor-pointer">
                                             <i class="fas fa-pencil-alt opacity-75 text-base mr-2 cursor-pointer"></i>
-                                            Posting Article</a>
+                                            Simpan Article</a>
                                     </div>
                                     <script>
+                                        var quill = new Quill('#editor', {
+                                            theme: 'snow',
+                                        });
                                         const btnPosting = document.getElementById('button-posting');
                                         btnPosting.onclick = uploadArticle;
                                         let base64file = '';
                                         var csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
+                                        function getBase64Image(img) {
+                                            var canvas = document.createElement("canvas");
+                                            canvas.width = img.width;
+                                            canvas.height = img.height;
+                                            var ctx = canvas.getContext("2d");
+                                            ctx.drawImage(img, 0, 0);
+                                            var dataURL = canvas.toDataURL("image/jpg");
+                                            return dataURL
+                                        }
+                                        
+
                                         function uploadArticle() {
                                             //ambil data gambar
-                                            var unImg = document.getElementById('image-upload');
-                                            let file = unImg.files[0];
-                                            let reader = new FileReader();
+                                            var newimg = getBase64Image(document.getElementById("file-image"));
                                             //ambil title
                                             var title = document.getElementById('input-title').value;
                                             //ambil data content summernote
-                                            var summernoteFrame = document.getElementById('id_content_iframe').contentWindow.document.body.firstElementChild;
-                                            var summernoteContent = summernoteFrame.nextElementSibling.getElementsByClassName('note-editable')[0].innerHTML;
-                                            reader.onloadend = function () {
-                                                base64file = reader.result;
+                                            var summerContent = quill.root.innerHTML;
 
-                                                async function postArticle() {
+                                            async function postArticle() {
                                                     const setting = {
                                                         method: 'POST',
                                                         headers: {
@@ -194,25 +202,20 @@
                                                         },
                                                         body: JSON.stringify({
                                                             'title': title,
-                                                            'content': summernoteContent,
-                                                            'img': base64file,
+                                                            'content': summerContent,
+                                                            'img': newimg,
                                                         })
                                                     }
 
-                                                    let response = await fetch('/supervisor/upload-article/', setting);
+                                                    let response = await fetch('/supervisor/edit/{{article.slug}}/', setting);
 
                                                     if (response.status === 200) {
                                                         console.log('success');
                                                     }
-                                                }
-                                                postArticle();
                                             }
-
-                                            //send article
-                                            reader.readAsDataURL(file);
+                                            postArticle();
+                                            window.location.href = "/supervisor/";
                                         }
-
-
 
                                     </script>
                                 </div>

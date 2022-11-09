@@ -1,14 +1,76 @@
 from django.shortcuts import render
 from django.views import View
+from django.http import HttpResponse
+from blog.models import Article, Tag
+import json, base64
+from django.core.files.base import ContentFile
+from blog.form import ArticleContentForm
 
 class Supervisor(View):
 
     context = ''
 
-    def get(self, request):
+    def get(self, request, title=''):
         if (self.context=='dashboard'):
-            return render(request, template_name='supervisor/dashboard.html', context={})
-        pass
+            article_query = Article.objects.all()
+            return render(request, template_name='supervisor/dashboard.html', context={
+                'article_query': article_query
+            })
+        if (self.context=='upload-article'):
+            contentForm = ArticleContentForm()
+            resp = render(request, template_name='supervisor/upload.html', context={'contentForm': contentForm})
+            resp['cache-control'] = "no-cache"
+            return resp
 
-    def post(self, request):
-        pass
+        if (self.context=='edit-article'):
+            article_query = Article.objects.get(slug=title)
+            contentForm = ArticleContentForm()
+            resp = render(request, template_name='supervisor/edit.html', context={'article': article_query, 'contentForm': contentForm})
+            resp['cache-control'] = "no-cache"
+            return resp
+
+
+
+    def post(self, request, title=''):
+        if (self.context == 'upload-article'):
+            data_str = (request.body).decode('utf-8')
+            request_bodyjson = json.loads(data_str)
+            tag = Tag.objects.all()[0]
+            title = request_bodyjson['title']
+            slug = (title.lower()).replace(' ', '-')
+            content = request_bodyjson['content']
+            base64image = request_bodyjson['img']
+            format, imgstr = base64image.split(';base64,') 
+            ext = format.split('/')[-1] 
+            data = ContentFile(base64.b64decode(imgstr), name=f'{title}.{ext}')
+            new_article = Article.objects.create(
+                title=title,
+                img=data,
+                slug=slug,
+                content=content,
+                visitor=0
+                )
+            new_article.save()
+            try:
+                return HttpResponse(status=200)
+            except:
+                return HttpResponse(status=500)
+
+        if (self.context == 'edit-article'):
+            article = Article.objects.get(slug=title)
+            data_str = (request.body).decode('utf-8')
+            request_bodyjson = json.loads(data_str)
+            tag = Tag.objects.all()[0]
+            title = request_bodyjson['title']
+            slug = (title.lower()).replace(' ', '-')
+            content = request_bodyjson['content']
+            base64image = request_bodyjson['img']
+            format, imgstr = base64image.split(';base64,') 
+            ext = format.split('/')[-1] 
+            data = ContentFile(base64.b64decode(imgstr), name=f'{title}.{ext}')
+            article.title = title
+            article.slug = slug
+            article.content = content
+            article.img = data
+            article.save()
+            return HttpResponse(status=200)
