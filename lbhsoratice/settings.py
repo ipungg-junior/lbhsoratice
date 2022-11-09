@@ -118,7 +118,7 @@ SUMMERNOTE_CONFIG = {
         'airMode': False,
 
         # # Change editor size
-        # 'width': '100%',
+        'width': '100%',
         # 'height': '480',
 
         # Toolbar customization
@@ -129,7 +129,7 @@ SUMMERNOTE_CONFIG = {
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['table', ['table']],
-            ['insert', ['link', 'picture']],
+            ['insert', ['link']],
             ['view', ['codeview']],
         ],
     },
