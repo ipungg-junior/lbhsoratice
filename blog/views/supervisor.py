@@ -28,6 +28,10 @@ class Supervisor(View):
             resp = render(request, template_name='supervisor/edit.html', context={'article': article_query, 'contentForm': contentForm})
             resp['cache-control'] = "no-cache"
             return resp
+        if (self.context=='accounts'):
+            resp = render(request, template_name='supervisor/account.html', context={})
+            resp['cache-control'] = "no-cache"
+            return resp
 
 
 

@@ -7,9 +7,9 @@
 <meta name="theme-color" content="#000000" />
 <link rel="shortcut icon" href="./assets/img/favicon.ico" />
 <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png" />
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" /> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <link rel="stylesheet" href="{% static 'css/compiled-tailwind/compiled-tailwind.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/account.css' %}" />
 <title>LBH Solo | Dashboard</title>
 {% endblock %}
 
@@ -50,8 +50,8 @@
 
                     <ul class="md:flex-col md:min-w-full flex flex-col list-none">
                         <li class="items-center mb-3">
-                            <a class="text-amber-500 hover:text-amber-800 text-sm font-bold" href="">
-                            <i class="fas fa-tv opacity-75 text-base mr-2"></i>
+                            <a class="text-blueGray-700 hover:text-blueGray-500 text-sm font-bold" href="/supervisor/">
+                            <i class="fas fa-tv text-blueGray-400 text-base mr-3"></i>
                             Dashboard</a>
                         </li>
                         <li class="items-center mb-3">
@@ -60,13 +60,13 @@
                             Buat Berita</a>
                         </li>
                         <li class="items-center mb-3">
-                            <a class="text-blueGray-700 hover:text-blueGray-500 text-sm font-bold" href="">
+                            <a class="text-blueGray-700 hover:text-blueGray-500 text-sm font-bold" href="#/dashboard">
                             <i class="fas fa-camera text-blueGray-400 text-base mr-3"></i>
                             Gambar Banner</a>
                         </li>
                         <li class="items-center mb-3">
-                            <a class="text-blueGray-700 hover:text-blueGray-500 text-sm font-bold" href="/supervisor/accounts/">
-                            <i class="fas fa-users text-blueGray-400 text-base mr-3"></i>
+                            <a class="text-amber-500 hover:text-amber-800 text-sm font-bold" href="/supervisor/accounts/">
+                            <i class="fas fa-users opacity-75 text-base mr-2"></i>
                             Akun</a>
                         </li>
                         <hr class="mb-2"> 
@@ -80,63 +80,21 @@
             </div>
         </nav>
         <div class="relative md:ml-64 bg-blueGray-50">
-            <!-- Header -->
-            <div class="relative bg-amber-500 md:pt-12 pb-32 pt-12">
-                <div class="px-4 md:px-10 mx-auto w-full">
-                    <div>
-
-                        <!-- Jumlah Pengunjung -->
-                        <div class="flex flex-wrap">
-
-                            <div class="w-full lg:w-6/12 xl:w-3/12 px-4 h-25">
-                                <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-25">
-                                    <div class="flex p-4">
-                                        <div class="flex flex-1">
-                                            <div class="relative w-full pr-4 max-w-full flex flex-col">
-                                                <h5 class="text-blueGray-400 uppercase font-bold text-xs">
-                                                    Pengunjung Minggu Ini
-                                                </h5>
-                                                <span class="font-semibold text-xl text-blueGray-700">
-                                                    12
-                                                </span>
-                                            </div>
-                                            <div class="relative w-auto pl-4 flex-initial">
-                                                <div
-                                                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-red-500">
-                                                    <i class="fas fa-users"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Jumlah Article -->
-                            <div class="w-full lg:w-6/12 xl:w-3/12 px-4 h-25">
-                                <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-25">
-                                    <div class="flex p-4">
-                                        <div class="flex flex-1">
-                                            <div class="relative w-full pr-4 max-w-full flex flex-col">
-                                                <h5 class="text-blueGray-400 uppercase font-bold text-xs">
-                                                    Article
-                                                </h5>
-                                                <span class="font-semibold text-xl text-blueGray-700">
-                                                    {{article_query.count}}
-                                                </span>
-                                            </div>
-                                            <div class="relative w-auto pl-4 flex-initial">
-                                                <div
-                                                    class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-blue-500">
-                                                    <i class="fas fa-newspaper"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+            <div id="modal-buat-akun" class="modal-buat-akun">
+                <div class="dialog-box">
+                    <input id="input-nama-pengguna" type="text" placeholder="Nama Pengguna">
+                    <input id="input-email" type="email" placeholder="Email">
+                    <input id="input-password" type="password" placeholder="Kata Sandi">
+                    <input id="input-konfirmasi-password" type="password" placeholder="Konfirmasi Kata Sandi">
+                    <div class="button-wrapper">
+                        <button id="button-daftar-akun" type="submit">Daftar</button>
+                        <button id="button-exit">Exit</button>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Header -->
+            <div class="relative bg-amber-500 md:pt-12 pb-32 pt-12">
             </div>
 
             <div class="px-4 md:px-10 mx-auto w-full -m-24">
@@ -147,14 +105,27 @@
                                 <div class="flex flex-wrap items-center">
                                     <div class="relative w-full max-w-full flex-grow flex-1">
                                         <h3 class="font-semibold text-base text-blueGray-700">
-                                            Daftar Artikel
+                                            Akun Administrator
                                         </h3>
                                     </div>
-                                    <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                                        <a class="text-base font-semibold">{{article_query.count}}</a>
+                                    <!-- Button Buat Akun -->
+                                    <div class="flex relative">
+                                        <a id="button-buat-akun" class="fas fa-pencil-alt text-white bg-amber-500 p-2 text-sm font-semibold rounded cursor-pointer"> Buat Akun</a>
                                     </div>
                                 </div>
+                                <script>
+                                    var modal = document.getElementById('modal-buat-akun');
+                                    var btnModal = document.getElementById('button-buat-akun');
+                                    var exit = document.getElementById('button-exit');
+                                    btnModal.addEventListener('click', function(){
+                                        modal.style.display = 'flex';
+                                    })
+                                    exit.addEventListener('click', function(){
+                                        modal.style.display = 'none';
+                                    })
+                                </script>
                             </div>
+
                             <div class="block w-full overflow-x-auto overflow-y-scroll" style="height: 25em;">
                                 <!-- Projects table -->
                                 <table class="items-center w-full bg-transparent border-collapse">
@@ -162,19 +133,19 @@
                                         <tr>
                                             <th
                                                 class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                Judul
+                                                Akun ID
                                             </th>
                                             <th
                                                 class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                Total Dilihat
+                                                Nama Pengguna
                                             </th>
                                             <th
                                                 class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                Tanggal Upload
+                                                Email
                                             </th>
                                             <th
                                                 class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                Editor
+                                                Status
                                             </th>
                                         </tr>
                                     </thead>
