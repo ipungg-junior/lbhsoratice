@@ -1,6 +1,27 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.utils.translation import gettext_lazy as _
+from blog.user_manager import UserManager
+
+class UserAccount(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(_('email address'), unique=True)
+    first_name = models.CharField(max_length=40)
+    last_name = models.CharField(max_length=40)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(default=timezone.now)
+    
+
+    # Client Manager Reuirements
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+    objects = UserManager()
+
+    def __str__(self):
+        return self.email
+
 
 class Tag(models.Model):
     nametag = models.CharField(max_length=12)

@@ -10,6 +10,7 @@ SECRET_KEY = 'django-insecure-^95^@kc)p%d1foiz)d^q(((th*^(*#fsv2m2^_7pdyc#$59^(*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = []
+AUTH_USER_MODEL = 'blog.UserAccount'
 
 # Application definition
 

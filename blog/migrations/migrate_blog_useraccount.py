@@ -6,36 +6,11 @@ import django.utils.timezone
 
 class Migration(migrations.Migration):
 
-    initial = True
-
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
+        ('blog', '0001_initial'),
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Tag',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nametag', models.CharField(max_length=12)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Article',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200)),
-                ('img', models.ImageField(default='default.jpg', upload_to='article-banner')),
-                ('slug', models.SlugField(max_length=200)),
-                ('content', models.TextField()),
-                ('created_on', models.DateTimeField(default=django.utils.timezone.now)),
-                ('visitor', models.IntegerField(default=0)),
-                ('tag', models.ManyToManyField(blank=True, null=True, to='blog.Tag')),
-            ],
-            options={
-                'ordering': ['-created_on'],
-            },
-        ),
         migrations.CreateModel(
             name='UserAccount',
             fields=[

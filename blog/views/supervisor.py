@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
-from blog.models import Article, Tag
+from blog.models import Article, Tag, UserAccount
 import json, base64
 from django.core.files.base import ContentFile
 from blog.form import ArticleContentForm
@@ -29,7 +29,8 @@ class Supervisor(View):
             resp['cache-control'] = "no-cache"
             return resp
         if (self.context=='accounts'):
-            resp = render(request, template_name='supervisor/account.html', context={})
+            account_query = UserAccount.objects.all()
+            resp = render(request, template_name='supervisor/account.html', context={'account_query':account_query})
             resp['cache-control'] = "no-cache"
             return resp
 
@@ -77,4 +78,11 @@ class Supervisor(View):
             article.content = content
             article.img = data
             article.save()
+            return HttpResponse(status=200)
+
+
+        if (self.context == "register-account"):
+            request_body = (request.body).decode('utf-8')
+            request_body = json.loads(request_body)
+            print(request_body)
             return HttpResponse(status=200)
