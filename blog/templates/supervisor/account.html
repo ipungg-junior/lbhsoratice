@@ -82,7 +82,8 @@
         <div class="relative md:ml-64 bg-blueGray-50">
             <div id="modal-buat-akun" class="modal-buat-akun">
                 <div class="dialog-box">
-                    <input id="input-nama-pengguna" type="text" placeholder="Nama Pengguna">
+                    {% csrf_token %}
+                    <input id="input-nama-lengkap" type="text" placeholder="Nama Lengkap">
                     <input id="input-email" type="email" placeholder="Email">
                     <input id="input-password" type="password" placeholder="Kata Sandi">
                     <input id="input-konfirmasi-password" type="password" placeholder="Konfirmasi Kata Sandi">
@@ -116,12 +117,46 @@
                                 <script>
                                     var modal = document.getElementById('modal-buat-akun');
                                     var btnModal = document.getElementById('button-buat-akun');
+                                    var btnDaftar = document.getElementById('button-daftar-akun');
                                     var exit = document.getElementById('button-exit');
                                     btnModal.addEventListener('click', function(){
                                         modal.style.display = 'flex';
                                     })
                                     exit.addEventListener('click', function(){
                                         modal.style.display = 'none';
+                                    })
+
+                                    btnDaftar.addEventListener('click', function(){
+                                        var csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+                                        var fullname = document.getElementById('input-nama-lengkap').value;
+                                        var mail = document.getElementById('input-email').value;
+                                        var password = document.getElementById('input-password').value;
+                                        var confPassword = document.getElementById('input-konfirmasi-password').value;
+                                        
+                                        // POST DATA REGISTER ACCOUNT
+                                        async function post() {
+                                            const setting = {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/json',
+                                                            'X-CSRFToken': csrf_token,
+                                                        },
+                                                        body: JSON.stringify({
+                                                            'fullname': fullname,
+                                                            'email': mail,
+                                                            'password': password,
+                                                            'confirmation_password': confPassword
+                                                        })
+                                                    }
+
+                                                    let response = await fetch('/supervisor/accounts/register/', setting);
+
+                                                    if (response.status === 200) {
+                                                        console.log('success');
+                                                    }
+                                        }
+                                        post();
+
                                     })
                                 </script>
                             </div>
@@ -152,22 +187,34 @@
 
                                     <tbody>
                                         <!-- LOOP ARTICLE HERE -->
-                                        {% for article in article_query %}
+                                        {% for account in account_query %}
                                         <tr>
                                             <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                                {{article.title}}
+                                                {{account.id}}
                                             </th>
                                             <td
                                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                {{article.visitor}}
+                                                {{account.first_name}} {{account.last_name}}
                                             </td>
                                             <td
                                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                {{article.created_on}}
+                                                {{account.email}}
                                             </td>
+                                            {% if account.is_active is True %}
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                <i class="text-green-500 fas fa-circle" style="margin-left: 1.2em;"></i>
+                                            </td>
+                                            {% else %}
+                                            <td
+                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                <i class="text-amber-500 fas fa-circle"></i>
+                                            </td>
+                                            {% endif %}
+                                            
                                             <td class="border-t-0 px-6 text-xs">
-                                                <a href="/supervisor/edit/{{article.slug}}/" class="fas fa-pencil-alt text-blue-500 mr-4"></a>
-                                                <a style="cursor: pointer" onclick="deleteArticle('{{article.slug}}')" class="fas fa-trash text-red-500 mr-4"></a>
+                                                <a href="/supervisor/account/{{account.id}}/" class="fas fa-pencil-alt text-blue-500 mr-4"></a>
+                                                <a style="cursor: pointer" onclick="deleteUser('{{account.id}}')" class="fas fa-trash text-red-500 mr-4"></a>
                                             </td>
                                         </tr>
                                         {% endfor %}
@@ -220,13 +267,15 @@
             document.getElementById(dropdownID).classList.toggle("block");
         }
 
-        function deleteArticle(slug){
-            var result = confirm("Want to delete?");
+        function deleteArticle(accountID){
+            var result = confirm("Akun akan dihapus secara permanen, yakin?");
             if (result) {
                 // Delete article by POST API
                 console.log('Remove function delete article -> ' + slug);
             }
         }
+
+
     </script>
 </body>
 {% endblock %}

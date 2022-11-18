@@ -70,6 +70,11 @@
                                 <i class="fas fa-camera text-blueGray-400 text-base mr-3"></i>
                                 Gambar Banner</a>
                         </li>
+                        <li class="items-center mb-3">
+                            <a class="text-blueGray-700 hover:text-blueGray-500 text-sm font-bold" href="/supervisor/accounts/">
+                            <i class="fas fa-users text-blueGray-400 text-base mr-3"></i>
+                            Akun</a>
+                        </li>
                         <hr class="mb-2">
                         <li class="items-center mb-3">
                             <a class="text-red-700 hover:text-blueGray-500 text-sm font-bold" href="#/dashboard">
@@ -171,7 +176,7 @@
                                         btnPosting.onclick = uploadArticle;
                                         let base64file = '';
                                         var csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
-
+ 
                                         function uploadArticle() {
                                             //ambil data gambar
                                             var unImg = document.getElementById('image-upload');
