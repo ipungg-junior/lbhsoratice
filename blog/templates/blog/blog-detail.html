@@ -3,19 +3,6 @@
 
 
 {% block head %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <script src="https://kit.fontawesome.com/45561a8e99.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/static/css/blog/blog-detail.css">
-</head>
-
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <link rel="stylesheet" href="{% static 'css/compiled-tailwind/compiled-tailwind.min.css' %}" />
 {% endblock %}
@@ -23,45 +10,7 @@
 
 {% block body %}
 {%csrf_token%}
-
-<body>
-    <section class="post-header">
-        <div class="header-content post-container">
-            <!-- Back -->
-            <a href="/blog/templates/blog/blog-list.html" class="back-home">Back To Home</a>
-            <!-- Title -->
-            <h1 class="header-title">Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h1>
-            <!-- Image -->
-            <img src="/static/img/landing/home-blog1.jpg" alt="" class="header-img">
-            
-        </div>
-    </section>
-
-    <section class="post-content post-container">
-        <h2 class="sub-heading">New Topic 1</h2>
-        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam, aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit autem adipisci. Repellat.</p>
-        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam, aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit autem adipisci. Repellat.</p>
-        <h2 class="sub-heading">New Topic 1</h2>
-        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam, aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit autem adipisci. Repellat.</p>
-        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam, aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit autem adipisci. Repellat.</p>
-        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam, aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit autem adipisci. Repellat.</p>
-    </section>
-
-    <div class="share post-container">
-        <span class="share-title">Bagikan artikel</span>
-        <div class="social">
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-        </div>
-    </div>
-</body>
-</html>
-
-
-
-<!-- <div class="w-full mb-5">
+<div class="w-full mb-5">
     <div class="flex flex-wrap">
         <div class="w-full p-3">
             <div class="text-base font-bold">
@@ -91,31 +40,7 @@
         {% endfor %}
     </div>
 </div>
-</div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
 
 
 <!-- JS untuk laporan jika ada pengunjung membaca, maka jumlah visitor akan bertambah didatabase -->
