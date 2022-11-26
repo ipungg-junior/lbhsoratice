@@ -1,0 +1,154 @@
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+    box-sizing: border-box;
+}
+:root{
+    --heading: 'Montserrat', sans-serif;
+    --main-color: #EFC12E;
+	--main-container-color: #F4E1B5;
+	--second-color: ;
+}
+a {
+    text-decoration: none;
+}
+li {
+    list-style: none;
+}
+img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    object-position: center;
+}
+section {
+    padding: 1rem 0 2rem;
+}
+i {
+    color: black;
+    font-size: 24px;
+    padding: 1rem;
+}
+i:hover {
+    color: var(--main-color);
+}
+.container {
+    max-width: 1068px;
+    margin: auto;
+    width: 100%;
+}
+.post-header {
+    width: 100%;
+    height: 500px;
+    background: var(--main-container-color);
+}
+.post-container {
+    max-width: 800px;
+    margin: auto;
+    width: 100%;
+}
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem !important;
+}
+.back-home {
+    color: var(--main-color);
+    font-size: 1.1rem;
+}
+.back-home:hover {
+    text-decoration: underline;
+}
+.header-title {
+    padding: 1rem 0;
+    width: 90%;
+    font-size: 2.5rem;
+    object-fit: cover;
+    object-position: center;
+    text-align: center;
+}
+.post-content {
+    margin-top: 10rem !important;
+}
+.sub-heading {
+    font-size: 1.2rem;
+}
+.post-text {
+    font-size: 1rem;
+    line-height: 1.7rem;
+    margin: 1rem 0;
+    text-align: justify;
+}
+.share {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+}
+.share-title {
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .container {
+        margin: 0 auto;
+        width: 95%;
+    }
+}
+@media (max-width: 768px) {
+    section {
+        padding: 2rem;
+    }
+    .header-content {
+        margin-top: 3rem !important;
+    }
+    .header-title {
+        font-size: 2rem;
+    }
+    .header-img {
+        height: 330px;
+    }
+    .post-header {
+        height: 435px;
+    }
+    .post-content {
+        margin-top: 9rem !important;
+    }
+}
+
+@media (max-width: 426px) {
+    .post-header {
+        height: 390px;
+    }
+    .header-title {
+        width: 100%;
+    }
+    .header-img {
+        height: 260px;
+    }
+}
+
+@media (max-width: 396px) {
+    .header-title {
+        font-size: 1.4rem;
+    }
+    .header-img {
+        height: 190px;
+    }
+    .post-header {
+        height: 335px;
+    }
+    .post-content {
+        margin-top: 5rem !important;
+    }
+    .post-text {
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        margin: 10px 0;
+    }
+}
