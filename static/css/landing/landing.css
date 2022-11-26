@@ -41,6 +41,7 @@ h3 {
 header {
 	background-color: var(--main-color);
 }
+
 .top-head{
     display: flex;
     justify-content: space-between;

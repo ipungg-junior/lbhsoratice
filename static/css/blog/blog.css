@@ -189,7 +189,7 @@ hr{
     display: block;
 }
 
-.hot-topic-content{
+/* .hot-topic-content{
     position: absolute;
     bottom: 0;
     left: 20px;
@@ -197,10 +197,20 @@ hr{
     padding: 10px 20px;
     line-height: 1.3;
     color: #f3f3f3;
+} */
+
+.hot-topic-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: absolute;
+    color: white;
+    top:0;
+    height: 90%;
 }
 
 .hot-topic h2{
-    padding: 10px 0;
+    padding: 10px 0 0 0;
     font-size: 18px;
     text-shadow: 0 0 2px #000;
 }
@@ -283,6 +293,11 @@ main a:hover{
     padding: 15px 30px;
 }
 
+.container-top-left article img{
+    width: 100%;
+    height: 400;
+}
+
 .container-bottom-left{
     background: #f3f3f3;
     margin: 15px 30px;
@@ -300,7 +315,7 @@ main a:hover{
 
 .main-container-right article{
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 3fr 2fr;
     padding: 15px 0;
     border-bottom: 1px solid var(--main-color);
 }
@@ -310,9 +325,10 @@ main a:hover{
 }
 
 .main-container-right img{
-    width: 100px;
-    height: 100px;
+    width: 170px;
+    height: 100px;  
     align-self: center;
+    background: cover;
 }
 
 .main-container-right h4{

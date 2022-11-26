@@ -5,6 +5,7 @@ from blog.models import Article, Tag, UserAccount
 import json, base64
 from django.core.files.base import ContentFile
 from blog.form import ArticleContentForm
+from blog.service.account import Account
 
 class Supervisor(View):
 
@@ -48,14 +49,15 @@ class Supervisor(View):
             format, imgstr = base64image.split(';base64,') 
             ext = format.split('/')[-1] 
             data = ContentFile(base64.b64decode(imgstr), name=f'{title}.{ext}')
-            new_article = Article.objects.create(
-                title=title,
-                img=data,
-                slug=slug,
-                content=content,
-                visitor=0
-                )
-            new_article.save()
+            print(base64image)
+            # new_article = Article.objects.create(
+            #     title=title,
+            #     img=data,
+            #     slug=slug,
+            #     content=content,
+            #     visitor=0
+            #     )
+            # new_article.save()
             try:
                 return HttpResponse(status=200)
             except:
@@ -84,5 +86,8 @@ class Supervisor(View):
         if (self.context == "register-account"):
             request_body = (request.body).decode('utf-8')
             request_body = json.loads(request_body)
-            print(request_body)
-            return HttpResponse(status=200)
+            try:
+                new_account = Account.create_new_account(request_body)
+                return HttpResponse(status=200)
+            except:
+                return HttpResponse(status=500)
