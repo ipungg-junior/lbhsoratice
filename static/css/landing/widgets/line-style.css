@@ -73,34 +73,10 @@
 	position:absolute;
 	top:1000%;
 }
-.purpose-btn-line-1 {
-	border:0.5px solid black;
-	width:663px;
-	position:absolute;
-	left:33px;
-	top:300px;
-}
-.purpose-btn-line-2 {
-	border:0.5px solid black;
-	width:663px;
-	position:absolute;
-	left:33px;
-	top:400px;
-}
-.purpose-btn-line-3 {
-	border:0.5px solid black;
-	width:663px;
-	position:absolute;
-	left:33px;
-	top:500px;
-}
-.purpose-btn-line-4 {
-	border:0.5px solid black;
-	width:663px;
-	position:absolute;
-	left:33px;
-	top:600px;
-}
+
+
+
+
 .partner-top-line {
 	border:1px solid white;
 	width:100%;
