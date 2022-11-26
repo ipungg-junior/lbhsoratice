@@ -10,9 +10,9 @@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" /> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <link rel="stylesheet" href="{% static 'css/compiled-tailwind/compiled-tailwind.min.css' %}" />
-<!-- SUMMERNOTE JS bs 4-->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js" defer></script>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <title>LBH Solo | Dashboard</title>
 {% endblock %}
 
@@ -71,9 +71,10 @@
                                 Gambar Banner</a>
                         </li>
                         <li class="items-center mb-3">
-                            <a class="text-blueGray-700 hover:text-blueGray-500 text-sm font-bold" href="/supervisor/accounts/">
-                            <i class="fas fa-users text-blueGray-400 text-base mr-3"></i>
-                            Akun</a>
+                            <a class="text-blueGray-700 hover:text-blueGray-500 text-sm font-bold"
+                                href="/supervisor/accounts/">
+                                <i class="fas fa-users text-blueGray-400 text-base mr-3"></i>
+                                Akun</a>
                         </li>
                         <hr class="mb-2">
                         <li class="items-center mb-3">
@@ -116,28 +117,23 @@
                                             style="z-index: 3;">
                                             <input id="image-upload" type="file" accept="image/*" class="w-full h-40"
                                                 style="cursor: pointer; position: absolute; z-index: 4;opacity: 0;" />
-                                            <i id="icon-download" class="fas fa-download absolute self-center text-white"></i>
-                                            <a id="caption-download" class="text-base font-semibold absolute self-center mt-12 text-white">Upload
+                                            <i id="icon-download"
+                                                class="fas fa-download absolute self-center text-white"></i>
+                                            <a id="caption-download"
+                                                class="text-base font-semibold absolute self-center mt-12 text-white">Upload
                                                 Gambar</a>
+                                                
                                         </div>
-                                        <script>
-                                            let img = document.getElementById('image-upload');
-                                            let icon = document.getElementById('icon-download');
-                                            let captionIcon = document.getElementById('caption-download');
-                                            img.onchange = uploadHandler;
-                                            function uploadHandler() {
-                                                const [file] = img.files;
-                                                if (file) {
-                                                    document.getElementById('file-image').src = URL.createObjectURL(file);
-                                                    document.getElementById('file-image').onload = function () {
-                                                        URL.revokeObjectURL(document.getElementById('file-image').src) // free memory
-                                                        icon.style.display = "none";
-                                                        captionIcon.style.display = "none";
-                                                    }
-                                                }
-                                            }
-                                        </script>
+                                        
+                                    </div>
+                                    <div id="tag-wrapper" class="flex p-2 mt-2 flex-col">
+                                        <label for="cars">Pilih Tag :</label>
 
+                                        <div id="tag-list" class="flex flex-row overflow-x-auto">
+                                            <div id="tag-" class="flex mr-2 bg-blueGray-500 cursor-pointer" style="padding: 5px 12px;" onclick="tagClick(id)">
+                                                tag 2
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- Title -->
                                     <div class="lg:w-full mt-5">
@@ -150,76 +146,23 @@
                                         border-radius: 4px;
                                         outline: solid 1px;
                                         outline-color: rgb(213, 212, 212);">
-                                        <script>
-                                            const inpTitle = document.getElementById('input-title');
-                                            inpTitle.onclick = changeBold;
-                                            function changeBold() {
-                                                inpTitle.style.fontWeight = 500;
-                                            }
-                                        </script>
                                     </div>
                                 </div>
 
                                 <div class="w-full h-12 p-4">
                                     {%csrf_token%}
                                     <!-- SUMMERNOTE TAG -->
-                                    {{contentForm.content}}
+                                    <div id="editor" style="height: 32em;">
+                                    </div>
                                     <!-- END SUMMERNOTE -->
+
+                                    
 
                                     <div class="flex w-full justify-center items-center mt-3" id="button-posting">
                                         <a class="text-white text-sm font-bold bg-amber-500 p-3 rounded cursor-pointer">
                                             <i class="fas fa-pencil-alt opacity-75 text-base mr-2 cursor-pointer"></i>
                                             Posting Article</a>
                                     </div>
-                                    <script>
-                                        const btnPosting = document.getElementById('button-posting');
-                                        btnPosting.onclick = uploadArticle;
-                                        let base64file = '';
-                                        var csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
- 
-                                        function uploadArticle() {
-                                            //ambil data gambar
-                                            var unImg = document.getElementById('image-upload');
-                                            let file = unImg.files[0];
-                                            let reader = new FileReader();
-                                            //ambil title
-                                            var title = document.getElementById('input-title').value;
-                                            //ambil data content summernote
-                                            var summernoteFrame = document.getElementById('id_content_iframe').contentWindow.document.body.firstElementChild;
-                                            var summernoteContent = summernoteFrame.nextElementSibling.getElementsByClassName('note-editable')[0].innerHTML;
-                                            reader.onloadend = function () {
-                                                base64file = reader.result;
-
-                                                async function postArticle() {
-                                                    const setting = {
-                                                        method: 'POST',
-                                                        headers: {
-                                                            'Content-Type': 'application/json',
-                                                            'X-CSRFToken': csrf_token,
-                                                        },
-                                                        body: JSON.stringify({
-                                                            'title': title,
-                                                            'content': summernoteContent,
-                                                            'img': base64file,
-                                                        })
-                                                    }
-
-                                                    let response = await fetch('/supervisor/upload-article/', setting);
-
-                                                    if (response.status === 200) {
-                                                        console.log('success');
-                                                    }
-                                                }
-                                                postArticle();
-                                            }
-
-                                            //send article
-                                            reader.readAsDataURL(file);
-                                        }
-
-
-
-                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -244,6 +187,7 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/supervisor/upload_article.js' %}"></script>
     <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script>
     <script type="text/javascript">
         /* Sidebar - Side navigation menu on mobile/responsive mode */
@@ -267,13 +211,7 @@
             document.getElementById(dropdownID).classList.toggle("block");
         }
 
-        function deleteArticle(slug) {
-            var result = confirm("Want to delete?");
-            if (result) {
-                // Delete article by POST API
-                console.log('Remove function delete article -> ' + slug);
-            }
-        }
+        
     </script>
 </body>
 {% endblock %}

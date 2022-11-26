@@ -4,14 +4,18 @@ from blog.models import Article
 
 class Blog(View):
     context = ''
-    blog_list_html = 'blog/blog-list.html'
+    blog_list_html = 'blog/blog-list-mirror.html'
     blog_detail_html = 'blog/blog-detail.html'
 
     def get(self, request, title=''):
         if (self.context=='blog-list'):
             article_list = Article.objects.all()
+            # top_article = []
+            # for i in article_list:
+            #     topCount = 0
+            #     if i.
             return render(request, template_name=self.blog_list_html, content_type='text/html', context={
-                'article': article_list
+                'article_list': article_list
             })    
 
         if (self.context=='blog-detail'):

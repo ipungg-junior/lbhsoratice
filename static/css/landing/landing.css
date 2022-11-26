@@ -44,20 +44,20 @@ header {
 .logo-wrapper .logo {
 	display: flex;
 	align-items: center;
-	width:163px;
-	height:197px;
+	width:120px;
+	height:147px;
 	background-image:url(/static/img/landing/logo_lbh.png);
 	background-size:cover;
 }
 .navbar {
 	padding-left: 4rem;
 	width: 20%;
-	justify-content: space-between;
+	justify-content: space-around;
 	display: flex;
 }
 .navbar a {
 	color: white;
-	font-size: 2rem;
+	font-size: 24px;
 }
 
 
@@ -66,14 +66,14 @@ header {
 	width:100%;
 	min-height: 20vh;
 	position:absolute;
-	top:52.75%;
+	top:30%;
 }
 .main-title {
 	padding: 4rem 20%;
 	color:white;
 	position:absolute;
 	font-family:Crimson Pro;
-	font-size:120px;
+	font-size:70px;
 	font-weight: normal;
 }
 .sub-title {
@@ -93,7 +93,7 @@ header {
 	width:100%;
 	min-height: 120vh;
 	position:absolute;
-	top:124%;
+	top:95%;
 	left: 1rem;
 }
 .our-team-numbering {
@@ -110,7 +110,7 @@ header {
 	position:absolute;
 	font-family:Crimson Pro;
 	left: 9.75%;
-	top: 14%;
+	top: 17%;
 	font-size:48px;
 	font-weight: bold;
 }
