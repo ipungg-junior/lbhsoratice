@@ -1,3 +1,10 @@
+var tag = [];
+
+function tagClick(id){
+    var t = document.getElementById(id).value;
+    tag.append(t);
+    console
+}
 
 // Image upload handler
 let img = document.getElementById('image-upload');
@@ -43,10 +50,13 @@ function uploadArticle() {
     let reader = new FileReader();
     //ambil title
     var title = document.getElementById('input-title').value;
-    //ambil data content summernote
-    var summernoteFrame = document.getElementById('id_content_iframe').contentWindow.document.body.firstElementChild;
-    var summernoteContent = summernoteFrame.nextElementSibling.getElementsByClassName('note-editable')[0].innerHTML;
+    //ambil data content summernote    
+    var summernoteContent = quill.root.innerHTML;
+
     reader.onloadend = function () {
+        if (file == null) {
+            console.log("No image");
+        }
         base64file = reader.result;
 
         async function postArticle() {
@@ -68,11 +78,23 @@ function uploadArticle() {
             if (response.status === 200) {
                 console.log('success');
             }
+            URL.revokeObjectURL(file);
+            unImg.value = null;
         }
         postArticle();
     }
-    //send article
-    reader.readAsDataURL(file);
+    if (summernoteContent == "<p><br></p>" || title =="") {
+        alert("Harap isi konten artikel");
+    } else {
+        //send article
+        try {
+
+            reader.readAsDataURL(file);
+        }
+        catch (e) {
+            alert("Harap upload gambar!");
+        }
+    }
 }
 
 

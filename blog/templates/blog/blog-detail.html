@@ -3,48 +3,51 @@
 
 
 {% block head %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <script src="https://kit.fontawesome.com/45561a8e99.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/static/css/blog/blog-detail.css">
-</head>
-
-
+<script src="https://kit.fontawesome.com/45561a8e99.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/static/css/blog/blog-detail.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <link rel="stylesheet" href="{% static 'css/compiled-tailwind/compiled-tailwind.min.css' %}" />
 {% endblock %}
 
 
 {% block body %}
-{%csrf_token%}
 
 <body>
     <section class="post-header">
         <div class="header-content post-container">
-            <!-- Back -->
-            <a href="/blog/templates/blog/blog-list.html" class="back-home">Back To Home</a>
+            <!-- Menu -->
+            <div class="menu">
+                <ul>
+                    <li><a href="/"><i class="fa fa-home"></i></a></li>
+                    <li><a href="/"><i class="fa fa-newspaper"></i></a></li>
+                </ul>
+            </div>
+            
             <!-- Title -->
             <h1 class="header-title">Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h1>
-            <!-- Image -->
-            <img src="/static/img/landing/home-blog1.jpg" alt="" class="header-img">
-            
         </div>
     </section>
+    <!-- Image -->
 
     <section class="post-content post-container">
+        <img src="/static/img/landing/home-blog1.jpg" alt="" class="header-img">
         <h2 class="sub-heading">New Topic 1</h2>
-        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam, aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit autem adipisci. Repellat.</p>
-        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam, aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit autem adipisci. Repellat.</p>
+        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam,
+            aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit
+            autem adipisci. Repellat.</p>
+        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam,
+            aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit
+            autem adipisci. Repellat.</p>
         <h2 class="sub-heading">New Topic 1</h2>
-        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam, aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit autem adipisci. Repellat.</p>
-        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam, aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit autem adipisci. Repellat.</p>
-        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam, aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit autem adipisci. Repellat.</p>
+        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam,
+            aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit
+            autem adipisci. Repellat.</p>
+        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam,
+            aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit
+            autem adipisci. Repellat.</p>
+        <p class="post-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut pariatur commodi quibusdam,
+            aspernatur earum saepe quos dicta id voluptatem eos voluptatibus eligendi ratione veniam eius neque odit
+            autem adipisci. Repellat.</p>
     </section>
 
     <div class="share post-container">
@@ -57,6 +60,7 @@
         </div>
     </div>
 </body>
+
 </html>
 
 
@@ -94,51 +98,27 @@
 </div> -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- JS untuk laporan jika ada pengunjung membaca, maka jumlah visitor akan bertambah didatabase -->
 <script>
-var csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
-async function reportVisitor() {
-    const setting = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrf_token,
-        },
-        body: JSON.stringify({
-            'slug': '{{article.slug}}'
-        })
-    }
+    var csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+    async function reportVisitor() {
+        const setting = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrf_token,
+            },
+            body: JSON.stringify({
+                'slug': '{{article.slug}}'
+            })
+        }
 
-    let response = await fetch('/blog-service/report-visitor/', setting);
+        let response = await fetch('/blog-service/report-visitor/', setting);
 
-    if (response.status === 200) {
-        console.log('success');
+        if (response.status === 200) {
+            console.log('success');
+        }
     }
-}
-setTimeout(reportVisitor, 7000);
+    setTimeout(reportVisitor, 7000);
 </script>
 {% endblock %}
