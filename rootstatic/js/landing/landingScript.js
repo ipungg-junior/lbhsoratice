@@ -67,13 +67,3 @@ else {
 //         $('.blogs-hint').hide();
 //     }
 // })
-
-function purposeShowContent(id){
-    var elem = document.getElementById(id);
-    var isExist = elem.classList.contains('show');
-    if (isExist){
-        elem.classList.remove('show');
-    }else{
-        elem.classList.add('show');
-    }
-}

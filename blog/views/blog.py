@@ -4,8 +4,8 @@ from blog.models import Article
 
 class Blog(View):
     context = ''
-    blog_list_html = 'blog/blog-list-mirror.html'
-    blog_detail_html = 'blog/blog-detail.html'
+    blog_list_html = 'blog/blog-list.html'
+    blog_detail_html = 'blog/blog-detail-mirror.html'
 
     def get(self, request, title=''):
         if (self.context=='blog-list'):
