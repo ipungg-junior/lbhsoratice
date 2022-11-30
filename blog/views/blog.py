@@ -10,12 +10,14 @@ class Blog(View):
     def get(self, request, title=''):
         if (self.context=='blog-list'):
             article_list = Article.objects.all()
-            # top_article = []
-            # for i in article_list:
-            #     topCount = 0
-            #     if i.
+            top_article = []
+            topCount = 0
+            for i in article_list:
+                if (i.visitor > topCount):
+                    top_article = i
             return render(request, template_name=self.blog_list_html, content_type='text/html', context={
-                'article_list': article_list
+                'article_list': article_list,
+                'top_article': top_article
             })    
 
         if (self.context=='blog-detail'):
