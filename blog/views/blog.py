@@ -26,9 +26,12 @@ class Blog(View):
 
             # Mencari berita terkait (tag)
             suggestion = ''
-            for i in article_tag:
-                suggest = Article.objects.filter(tag=i)
-                suggestion = suggest
+            import random
+            items = list(Article.objects.all())
+            # change 3 to how many random items you want
+            random_items = random.sample(items, 4)
+            suggestion = random_items
+
             return render(request, template_name=self.blog_detail_html, context={'article': article, 'suggestion': suggestion}, content_type='text/html')   
 
     def post(self, request):

@@ -58,9 +58,10 @@
             <h3>World's Leading Tech News Portal</h3>
             <div class = "current-news-head">
                 {% for article in article_list %}
-                <div class="news-head-content" href="/blog/{{article.slug}}/">
-                    <img src = "{{article.img.url}}" alt = "">
-                    <h3>{{article.title}}<span>{{article.created_on | date}}</span></h3>
+                <div class="news-head-content">
+                    <a href="/blog/{{article.slug}}/"></a>
+                    <img src = "{{article.img.url}}" href="/blog/{{article.slug}}/">
+                    <h3 href="/blog/{{article.slug}}/">{{article.title}}<span>{{article.created_on | date}}</span></h3>
                 </div>
                {% endfor %}
             </div>
