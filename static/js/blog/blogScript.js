@@ -17,3 +17,8 @@ btnTimes.addEventListener('click', function(){
         navBar.classList.remove("show-nav");
     }
 })
+
+// animation
+AOS.init({
+    duration: 1000
+});
