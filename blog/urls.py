@@ -10,6 +10,7 @@ urlpatterns = [
     path('blog/<slug:title>/', Blog.as_view(context='blog-detail')),
     path('supervisor/', Supervisor.as_view(context='dashboard')),
     path('supervisor/edit/<slug:title>/', Supervisor.as_view(context='edit-article')),
+    path('supervisor/delete/<slug:title>/', Supervisor.as_view(context='delete-article')),
     path('supervisor/upload-article/', Supervisor.as_view(context='upload-article')),
     path('supervisor/accounts/', Supervisor.as_view(context='accounts')),
     path('supervisor/accounts/register/', Supervisor.as_view(context='register-account')),

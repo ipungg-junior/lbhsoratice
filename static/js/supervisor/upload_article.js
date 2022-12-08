@@ -77,6 +77,7 @@ function uploadArticle() {
 
             if (response.status === 200) {
                 console.log('success');
+                window.location.href = '/supervisor/';
             }
             URL.revokeObjectURL(file);
             unImg.value = null;
@@ -88,7 +89,6 @@ function uploadArticle() {
     } else {
         //send article
         try {
-
             reader.readAsDataURL(file);
         }
         catch (e) {
@@ -99,9 +99,26 @@ function uploadArticle() {
 
 
 function deleteArticle(slug) {
+    var csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
     var result = confirm("Want to delete?");
     if (result) {
-        // Delete article by POST API
-        console.log('Remove function delete article -> ' + slug);
+        console.log(csrf_token);
+        async function deleteArticle() {
+            const setting = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrf_token,
+                },
+                body: JSON.stringify({})
+            }
+
+            let response = await fetch(('/supervisor/delete/'+slug+'/'), setting);
+
+            if (response.status === 200) {
+                console.log('success');
+            }
+        }
+        deleteArticle();
     }
 }

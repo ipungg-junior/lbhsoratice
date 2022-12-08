@@ -51,106 +51,57 @@
             <div class="search-bar"></div> 
         </div>
     </header>
-
-    <section class = "banner">
-        <div class = "banner-main-content">
-            <h2>Berita terbaru dari LBH SORATICE</h2>
-            <h3>World's Leading Tech News Portal</h3>
-            <div class = "current-news-head">
-                {% for article in article_list %}
-                <div class="news-head-content">
-                    <a href="/blog/{{article.slug}}/"></a>
-                    <img src = "{{article.img.url}}" href="/blog/{{article.slug}}/">
-                    <h3 href="/blog/{{article.slug}}/">{{article.title}}<span>{{article.created_on | date}}</span></h3>
+    <div class="container-main">
+        
+    <section class = "main-container-left">
+        <h2>Berita Terkini</h2>
+        <div class = "container-top-left">
+            <a href = "/blog/{{top_article.slug}}/"></a>
+            <img src = "{{top_article.img.url}}">
+                <div class="top-left-content">
+                    <h3>{{top_article.title}}</h3>
+                    <p>{{top_article.content|slice:":140" | safe}} ...</p>
                 </div>
-               {% endfor %}
-            </div>
-        </div>
-        <div class = "banner-sub-content">
-            <div class = "hot-topic">
-                <img src = "/static/img/landing/home-blog1.jpg" alt = "">
-                <div class = "hot-topic-content">
-                    <h2>Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                    <h3>New Topic 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore consequatur nostrum minus iusto fugit unde.</p>
-                    <a href = "/blog/templates/blog/blog-detail.html">Read More</a>
-                </div>
-            </div>
-            <div class = "hot-topic">
-                <img src = "/static/img/landing/home-blog1.jpg" alt = "">
-                <div class = "hot-topic-content">
-                    <h2>Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                    <h3>New Topic 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore consequatur nostrum minus iusto fugit unde.</p>
-                    <a href = "/blog/templates/blog/blog-detail.html">Read More</a>
-                </div>
-            </div>
-            <div class = "hot-topic">
-                <img src = "/static/img/landing/home-blog1.jpg" alt = "">
-                <div class = "hot-topic-content">
-                    <h2>Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                    <h3>New Topic 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore consequatur nostrum minus iusto fugit unde.</p>
-                    <a href = "/blog/templates/blog/blog-detail.html">Read More</a>
-                </div>
-            </div>
-            <div class = "hot-topic">
-                <img src = "/static/img/landing/home-blog1.jpg" alt = "">
-                <div class = "hot-topic-content">
-                    <h2>Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                    <h3>New Topic 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore consequatur nostrum minus iusto fugit unde.</p>
-                    <a href = "/blog/templates/blog/blog-detail.html">Read More</a>
-                </div>
-            </div>
         </div>
     </section>
+
+    <section class="list-container-right">
+        <h2>Hot Topics</h2>
+        {% for article in article_list|slice:":4" %}
+        <div class = "list-main-content">
+                <a href="/blog/{{article.slug}}/"></a>
+                <div class="list-content">
+                    <div class="content-img">
+                        <img src = "{{article.img.url}}" href="/blog/{{article.slug}}/">
+                    </div>
+                </div>
+                <div class="list-content-desc">    
+                    <h3 href="/blog/{{article.slug}}/">{{article.title|slice:":60"}} ...</h3>
+                    <span>{{article.created_on | date}}</span>
+                </div>
+            </div>
+            {% endfor %}
+    </section>
+</div>
+    
     <hr>
     <main>
-        <section class = "main-container-left">
-            <h2>Top Stories</h2>
-            <div class = "container-top-left">
-                <article>
-                    <img src = "{{top_article.img.url}}">
-                    <div>
-                        <h3>{{top_article.title}}</h3>
-                        <p>{{top_article.content|slice:":120" | safe}} ...</p>
-                        <a href = "/blog/{{top_article.slug}}/">Read More <span>>></span></a>
-                    </div>
-                </article>
-            </div>
-        </section>
-
+        
         <section class = "main-container-right">
-            <h2>Latest Stories</h2>
+            <h2>Berita Lainnya</h2>
+            <div class="list-content-right">
             <!-- For loop old article -->
+            {% for oldArticle in article_list|slice:":5" %}
             <article>
-                <h4>just in </h4>
                 <div>
-                    <img src = "/static/img/landing/home-blog1.jpg">
-                    <h2>Here's how to track your stimulus check with the IRS Get My Payment Portal</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, repellendus?</p>
-                    <a href = "/blog/templates/blog/blog-detail.html">Read More <span>>></span></a>
+                    <a href = "/blog/{{oldArticle.slug}}/"></a>
+                    <img src = "{{oldArticle.img.url}}">
+                    <h2>{{oldArticle.title|slice:":50"}} ...</h2>
+                    <p>{{oldArticle.content | slice:":80" | safe }} ... </p>
                 </div>
             </article>
-            <article>
-                <h4>just in </h4>
-                <div>
-                    <img src = "/static/img/landing/home-blog1.jpg">
-                    <h2>Here's how to track your stimulus check with the IRS Get My Payment Portal</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, repellendus?</p>
-                    <a href = "/blog/templates/blog/blog-detail.html">Read More <span>>></span></a>
-                </div>
-            </article>
-            <article>
-                <h4>just in </h4>
-                <div>
-                    <img src = "/static/img/landing/home-blog1.jpg">
-                    <h2>Here's how to track your stimulus check with the IRS Get My Payment Portal</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, repellendus?</p>
-                    <a href = "/blog/templates/blog/blog-detail.html">Read More <span>>></span></a>
-                </div>
-            </article>
+            {% endfor %}
+            </div>
         </section>
     </main>
 
