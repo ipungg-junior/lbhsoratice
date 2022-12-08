@@ -15,7 +15,7 @@
 
 
 {% block body %}
-
+{% csrf_token %}
 <body class="text-blueGray-700 antialiased">
 
     <div id="root">
@@ -27,7 +27,7 @@
                     type="button" onclick="toggleNavbar('example-collapse-sidebar')">
                     <i class="fas fa-bars"></i></button>
                 <a class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold">
-                    <img src="{% static 'img/logo-1.png' %}">
+                    <img src="{% static 'img/logo.png' %}">
                 </a>
                 <div class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded hidden"
                     id="example-collapse-sidebar">
@@ -184,7 +184,7 @@
                                         {% for article in article_query %}
                                         <tr>
                                             <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                                {{article.title}}
+                                                {{article.title|slice:":80"}} ...
                                             </th>
                                             <td
                                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -226,6 +226,7 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/supervisor/upload_article.js' %}"></script>
     <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script>
     <script type="text/javascript">
         /* Sidebar - Side navigation menu on mobile/responsive mode */
@@ -247,14 +248,6 @@
             });
             document.getElementById(dropdownID).classList.toggle("hidden");
             document.getElementById(dropdownID).classList.toggle("block");
-        }
-
-        function deleteArticle(slug){
-            var result = confirm("Want to delete?");
-            if (result) {
-                // Delete article by POST API
-                console.log('Remove function delete article -> ' + slug);
-            }
         }
     </script>
 </body>

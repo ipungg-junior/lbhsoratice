@@ -15,6 +15,7 @@ class Blog(View):
             for i in article_list:
                 if (i.visitor > topCount):
                     top_article = i
+                    topCount = i.visitor
             return render(request, template_name=self.blog_list_html, content_type='text/html', context={
                 'article_list': article_list,
                 'top_article': top_article

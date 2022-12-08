@@ -49,15 +49,14 @@ class Supervisor(View):
             format, imgstr = base64image.split(';base64,') 
             ext = format.split('/')[-1] 
             data = ContentFile(base64.b64decode(imgstr), name=f'{title}.{ext}')
-            print(base64image)
-            # new_article = Article.objects.create(
-            #     title=title,
-            #     img=data,
-            #     slug=slug,
-            #     content=content,
-            #     visitor=0
-            #     )
-            # new_article.save()
+            new_article = Article.objects.create(
+                title=title,
+                img=data,
+                slug=slug,
+                content=content,
+                visitor=0
+                )
+            new_article.save()
             try:
                 return HttpResponse(status=200)
             except:
@@ -91,3 +90,8 @@ class Supervisor(View):
                 return HttpResponse(status=200)
             except:
                 return HttpResponse(status=500)
+
+        if (self.context == "delete-article"):
+            article = Article.objects.get(slug=title)
+            article.delete()
+            return HttpResponse(status=200)
