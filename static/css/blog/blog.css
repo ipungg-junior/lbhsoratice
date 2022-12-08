@@ -9,7 +9,7 @@
     --main-color: #EFC12E;
 	--main-container-color: #F4E1B5;
 	--second-color: ;
-}
+} 
 
 body{
     font-family: 'Raleway', sans-serif;
@@ -538,6 +538,14 @@ footer > p{
 
 @media(max-width: 500px){
 
+    header {
+        margin-bottom: 1em;
+    }
+
+    .show-nav ul li a {
+        color: whitesmoke;
+    }
+
     .navigation-container .top-head {
         padding: 20px 20px 0 10px;
     }
@@ -598,8 +606,6 @@ footer > p{
         position: absolute;
         right: 0;
     }
-
-
     
 
     .banner .banner-sub-content {
@@ -621,7 +627,8 @@ footer > p{
     }
 
     .main-container-right h2 {
-        padding: 0 0 0 12px;
+        font-size: 18px;
+        padding: 0 0 15px 20px;
     }
 
 
@@ -678,6 +685,95 @@ footer > p{
 
     .footer-right p {
         font-size: 14px;
+    }
+
+
+    .container-main {
+        flex-direction: column;
+    }
+
+    .main-container-left > h2 {
+        font-size: 16px;
+        padding: 15px 0 0px 20px;
+    }
+
+    .main-container-left .container-top-left {
+        width: 25em;
+
+    }
+
+    .container-top-left a:first-child{
+        width: 22.5em;
+        height: 15.3em;
+    }
+
+    .container-top-left img {
+        height: 240;
+    }
+
+    .top-left-content {
+        width: 22.5em;
+        margin-top: 20em;
+        top:1;
+        bottom: 420;
+
+    }
+
+    .main-container-left h3 {
+        font-size: 12px;
+    }
+
+    .main-container-left p {
+        font-size: 11px;
+    }
+
+    .list-container-right {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    .list-container-right > h2 {
+        padding: 0px 0 0px 30px;
+        font-size: 18px;
+    }
+
+    .list-content .content-img {
+        width: 7.2em;
+        height: 4.5em;
+    }
+
+    .list-content-desc > h3 {
+        font-size: 12px;
+        padding-right: 14px;
+    }
+
+    .list-content-desc > span {
+        font-size: 10px;
+    }
+
+    .list-content-right {
+        flex-direction: column;
+        padding: 0px 0 15px 5px;
+    }
+    .main-container-right article {
+        width: 100%;
+    }
+
+    .main-container-right article h2 {
+        font-size: 12px;
+    }
+
+    .main-container-right article p {
+        font-size: 11px;
+    }
+
+    .main-container-right article a {
+        width: 21em;
+        height: 10em;
+    }
+
+    .main-container-right img {
+        height: 190px;
     }
 }
 
