@@ -1,0 +1,40 @@
+@media screen and (max-width: 1550px) {
+    
+}
+
+
+@media screen and (max-width: 1150px) {
+    
+}
+
+
+@media screen and (max-width: 770px) {
+    .main-title {
+        padding: 3rem 11%;
+        font-size:50px;
+    }
+
+    .sub-title {
+        padding-left: 5rem;
+        font-size:45px;
+    }   
+}
+
+
+@media screen and (max-width: 430px) {
+    
+}
+
+
+
+/* Android  */
+@media screen and (max-width: 390px) {
+    .main-title {
+        padding: 1.3rem 5%;
+        font-size:32px;
+    }
+    .sub-title {
+        padding-left: 1.2rem;
+        font-size:20px;
+    }   
+}
