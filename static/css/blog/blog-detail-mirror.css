@@ -154,6 +154,7 @@ article .article-desc a{
 }
 
 .left-wrapper .main-header h2 {
+    text-align: center;
     font-size: 28px;
     padding-bottom: .1em;
     padding-left: .2em;
@@ -170,7 +171,7 @@ article .article-desc a{
 
 .left-wrapper .main-header .share .social a {
     font-size: 20px;
-    color: var(--main-color);
+    color: rgb(45, 45, 94);
     margin-right: .5em;
     margin-left: .5em;
 }
@@ -308,8 +309,8 @@ footer > p{
     }
 
     .top-head .head-logo{
-        width: 50;
-        height: 40;
+        width: 60;
+        height: 50;
     }
 
     .main-wrapper{
@@ -328,6 +329,7 @@ footer > p{
     }
     
     .left-wrapper .main-header h2{
+        font-size: 18px;
         text-align: center;
     }
 
