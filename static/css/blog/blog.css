@@ -312,34 +312,37 @@ main a:hover{
 .container-top-left{
     padding: 15px 30px;
     display: flex;
-    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    height: 26.8em;
+    z-index: 1;
 }
 
 .container-top-left a:first-child {
     position: absolute;
-    width: 45.6em;
-    height: 24.5em;
+    width: 92.3%;
+    height: 93%;
     z-index: 4;
-}
+  }
 
 .container-top-left img{
-    margin-top: .7em;
-    position: relative;
-    width: 100%;
-    height: 390;
-}
+    position: absolute;
+    width: 740;
+    height: 410;
+    z-index: 3;
+  }
 
 .top-left-content {
-    width: 46.25em;
-    height: inherit;
-    background:rgba(10, 10, 10, 0.3);
+    width: 92.6%;
+    background: rgba(10, 10, 10, 0.3);
     backdrop-filter: blur(6px);
-    bottom: -11.5%;
+    bottom: 3;
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     color: #f3f3f3;
     padding: 1em 1em;
-}
+  }
+
 .top-left-content p {
     font-weight: 600;
 }
@@ -692,31 +695,33 @@ footer > p{
         flex-direction: column;
     }
 
+    .main-container-left {
+        padding-top: 12px;
+        width: 100%;
+    }
+
     .main-container-left > h2 {
         font-size: 16px;
         padding: 15px 0 0px 20px;
     }
 
     .main-container-left .container-top-left {
-        width: 25em;
-
+        width: 360px;
+        height: 230px;
     }
 
     .container-top-left a:first-child{
-        width: 22.5em;
-        height: 15.3em;
+        width: 324px;
+        height: 220px;
     }
 
     .container-top-left img {
-        height: 240;
+        height: 220;
+        width: 90%;
     }
 
     .top-left-content {
-        width: 22.5em;
-        margin-top: 20em;
-        top:1;
-        bottom: 420;
-
+        width: 324px;
     }
 
     .main-container-left h3 {
