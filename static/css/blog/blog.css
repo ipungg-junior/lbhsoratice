@@ -764,7 +764,7 @@ footer > p{
         align-items: center;
     }
     .main-container-right article {
-        width: calc(100vw - 120px);
+        width: calc(100vw - 100px);
     }
 
     .main-container-right article h2 {
@@ -813,7 +813,7 @@ footer > p{
     }
 
     .main-container-right article {
-        width: calc(100vw - 90px);
+        width: calc(100vw - 60px);
     }
 
 }
