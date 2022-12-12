@@ -9,7 +9,7 @@ SECRET_KEY = 'django-insecure-^95^@kc)p%d1foiz)d^q(((th*^(*#fsv2m2^_7pdyc#$59^(*
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', '191.101.80.221', 'lbhsoratice.com', 'www.lbhsoratice.com', '192.168.1.45']
+ALLOWED_HOSTS = ['127.0.0.1', '191.101.80.221', 'lbhsoratice.com', 'www.lbhsoratice.com', '192.168.1.45', '192.168.89.64']
 AUTH_USER_MODEL = 'blog.UserAccount'
 
 # Application definition

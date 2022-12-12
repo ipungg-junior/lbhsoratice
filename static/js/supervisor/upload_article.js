@@ -1,9 +1,25 @@
 var tag = [];
 
-function tagClick(id){
-    var t = document.getElementById(id).value;
-    tag.append(t);
-    console
+function openTagList(){
+    var menu = document.getElementById('tag-list-menu');
+    if (menu.classList.contains('hidden')){
+        menu.classList.remove('hidden');
+    }else{
+        menu.classList.add('hidden');
+    }
+}
+
+function selectTag(nametag){
+    if (!(tag.includes(nametag))){
+        tag.push(nametag);
+        var ul = document.getElementById("tag-selected-list");
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        a.appendChild(document.createTextNode(nametag));
+        li.setAttribute('class', 'px-2');
+        li.appendChild(a);
+        ul.appendChild(li);
+    }
 }
 
 // Image upload handler
@@ -56,7 +72,7 @@ function uploadArticle() {
     reader.onloadend = function () {
         if (file == null) {
             console.log("No image");
-        }
+        }else{
         base64file = reader.result;
 
         async function postArticle() {
@@ -70,19 +86,20 @@ function uploadArticle() {
                     'title': title,
                     'content': summernoteContent,
                     'img': base64file,
+                    'tag': tag
                 })
             }
 
             let response = await fetch('/supervisor/upload-article/', setting);
 
             if (response.status === 200) {
-                console.log('success');
                 window.location.href = '/supervisor/';
             }
             URL.revokeObjectURL(file);
             unImg.value = null;
         }
-        postArticle();
+            postArticle();
+        }
     }
     if (summernoteContent == "<p><br></p>" || title =="") {
         alert("Harap isi konten artikel");
