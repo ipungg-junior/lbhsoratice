@@ -19,7 +19,8 @@ class Supervisor(View):
             })
         if (self.context=='upload-article'):
             contentForm = ArticleContentForm()
-            resp = render(request, template_name='supervisor/upload.html', context={'contentForm': contentForm})
+            tag = Tag.objects.all()
+            resp = render(request, template_name='supervisor/upload.html', context={'contentForm': contentForm, 'tag_list': tag})
             resp['cache-control'] = "no-cache"
             return resp
 
@@ -41,7 +42,11 @@ class Supervisor(View):
         if (self.context == 'upload-article'):
             data_str = (request.body).decode('utf-8')
             request_bodyjson = json.loads(data_str)
-            tag = Tag.objects.all()[0]
+            tag = request_bodyjson['tag']
+            tag_list = []
+            for i in tag:
+                obj = Tag.objects.get(nametag=i)
+                tag_list.append(obj)
             title = request_bodyjson['title']
             slug = (title.lower()).replace(' ', '-')
             content = request_bodyjson['content']
@@ -55,7 +60,9 @@ class Supervisor(View):
                 slug=slug,
                 content=content,
                 visitor=0
-                )
+            )
+            for i in tag_list:
+                new_article.tag.add(i)
             new_article.save()
             try:
                 return HttpResponse(status=200)

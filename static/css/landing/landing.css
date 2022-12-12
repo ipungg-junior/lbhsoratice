@@ -426,10 +426,12 @@ header {
     .partner .slider-track{
         width: calc(150px * 8);
         padding:0;
-        
+        animation: scroll 13s linear infinite !important;
+        margin-left: 120em !important;
     }
 
     .slider-track .slide {
+        margin-right: 0px;
         padding : 1.3em !important;
         height: 150px !important;
         width: 150px !important;
@@ -696,20 +698,22 @@ header {
 }
 .partner .slider-track {
     padding: 3rem 0 12rem 0;
-    animation: scroll 40s linear infinite;
+    animation: scroll 30s linear infinite;
     display: flex;
     width: calc(250px * 8);
+    margin-left: 70em;
 }
 @keyframes scroll {
     0% {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(calc(-250px * 4));
+        transform: translateX(calc(-250px * 6));
     }
 }
 .slider-track .slide {
-    padding: 3rem;
+    padding: 1.4em;
+    margin-right: 2em;
     align-items: center;
     height: 250px;
     width: 250px;
