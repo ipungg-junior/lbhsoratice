@@ -41,7 +41,7 @@ class Supervisor(View):
     def post(self, request, title=''):
         if (self.context == 'upload-article'):
             data_str = (request.body).decode('utf-8')
-            request_bodyjson = json.loads(data_str)
+            request_bodyjson = json.loads(data_str) 
             tag = request_bodyjson['tag']
             tag_list = []
             for i in tag:
