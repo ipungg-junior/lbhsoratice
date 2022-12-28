@@ -2242,6 +2242,10 @@ select {
   height: 13em;
 }
 
+.h-50 {
+  height: 17em;
+} 
+
 .h-auto {
   height: auto;
 }
