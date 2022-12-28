@@ -1,7 +1,25 @@
 var tag = [];
 
+var modal = document.getElementById('modal-buat-tag');
+var btnModal = document.getElementById('show-buat-tag');
+var btnDaftar = document.getElementById('button-buat-tag');
+var exit = document.getElementById('button-exit');
+var menu = document.getElementById('tag-list-menu');
+
+btnModal.addEventListener('click', function () {
+    modal.style.display = 'flex';
+    menu.classList.add('hidden');
+})
+exit.addEventListener('click', function () {
+    modal.style.display = 'none';
+})
+
+btnDaftar.addEventListener('click', function () {
+    alert('Javascript error! (NO CODE)');
+})
+
 function openTagList(){
-    var menu = document.getElementById('tag-list-menu');
+    
     if (menu.classList.contains('hidden')){
         menu.classList.remove('hidden');
     }else{
@@ -15,10 +33,46 @@ function selectTag(nametag){
         var ul = document.getElementById("tag-selected-list");
         var li = document.createElement("li");
         var a = document.createElement("a");
+        var i = document.createElement("i");
         a.appendChild(document.createTextNode(nametag));
         li.setAttribute('class', 'px-2');
+        i.setAttribute('class', 'mx-1 fas fa-window-close cursor-pointer');
+        i.setAttribute('onclick', "removeTag('"+nametag+"')");
+        li.setAttribute('id', nametag);
         li.appendChild(a);
+        li.appendChild(i);
         ul.appendChild(li);
+    }
+}
+
+
+function removeTag(nametag){
+    if (tag.includes(nametag)){
+        tag.forEach(function ( elem, index ) {
+            if (elem==nametag){
+                document.getElementById(elem).remove();
+                tag.splice(index, 1);
+            }
+        });
+
+    }
+        //var ul = document.getElementById("tag-selected-list");
+        //var li = document.createElement("li");
+}
+
+
+
+async function deleteTagFromDB(nametag){
+    var ret = confirm("Anda yakin akan menghapus tag \"" + nametag + "\" ?");
+    if (ret){
+        let response = await fetch('/supervisor/delete-tag/'+nametag+"/");
+        if (response.status===200){
+            window.href.location = "/supervisor/upload-article/";
+        }else{
+            alert("Gagal menghapus tag.");
+        }
+    }else{
+        alert("membatalkan haus tag.");
     }
 }
 
@@ -133,7 +187,9 @@ function deleteArticle(slug) {
             let response = await fetch(('/supervisor/delete/'+slug+'/'), setting);
 
             if (response.status === 200) {
-                console.log('success');
+                window.location.href = '/supervisor/';
+            }else{
+                alert("Gagal menghapus, coba lagi . . .");
             }
         }
         deleteArticle();

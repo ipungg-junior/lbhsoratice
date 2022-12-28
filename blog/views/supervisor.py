@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotAllowed
 from blog.models import Article, Tag, UserAccount
 import json, base64
 from django.core.files.base import ContentFile
@@ -12,31 +12,36 @@ class Supervisor(View):
     context = ''
 
     def get(self, request, title=''):
-        if (self.context=='dashboard'):
-            article_query = Article.objects.all()
-            return render(request, template_name='supervisor/dashboard.html', context={
-                'article_query': article_query
-            })
-        if (self.context=='upload-article'):
-            contentForm = ArticleContentForm()
-            tag = Tag.objects.all()
-            resp = render(request, template_name='supervisor/upload.html', context={'contentForm': contentForm, 'tag_list': tag})
-            resp['cache-control'] = "no-cache"
-            return resp
+        if (request.user.is_staff == True):
+            if (self.context=='dashboard'):
+                article_query = Article.objects.all()
+                resp = render(request, template_name='supervisor/dashboard.html', context={
+                    'article_query': article_query
+                })
+                resp['cache-control'] = "no-cache"
+                return resp
+            if (self.context=='upload-article'):
+                contentForm = ArticleContentForm()
+                tag = Tag.objects.all()
+                resp = render(request, template_name='supervisor/upload.html', context={'contentForm': contentForm, 'tag_list': tag})
+                resp['cache-control'] = "no-cache"
+                return resp
 
-        if (self.context=='edit-article'):
-            article_query = Article.objects.get(slug=title)
-            contentForm = ArticleContentForm()
-            resp = render(request, template_name='supervisor/edit.html', context={'article': article_query, 'contentForm': contentForm})
-            resp['cache-control'] = "no-cache"
+            if (self.context=='edit-article'):
+                article_query = Article.objects.get(slug=title)
+                contentForm = ArticleContentForm()
+                resp = render(request, template_name='supervisor/edit.html', context={'article': article_query, 'contentForm': contentForm})
+                resp['cache-control'] = "no-cache"
+                return resp
+            if (self.context=='accounts'):
+                account_query = UserAccount.objects.all()
+                resp = render(request, template_name='supervisor/account.html', context={'account_query':account_query})
+                resp['cache-control'] = "no-cache"
+                return resp
+        else:
+            resp = HttpResponse(status=401, content="401 Unauthorized")
             return resp
-        if (self.context=='accounts'):
-            account_query = UserAccount.objects.all()
-            resp = render(request, template_name='supervisor/account.html', context={'account_query':account_query})
-            resp['cache-control'] = "no-cache"
-            return resp
-
-
+        
 
     def post(self, request, title=''):
         if (self.context == 'upload-article'):
