@@ -33,7 +33,6 @@ const autoSlide = () => {
 const btnHam = document.querySelector('.ham-btn');
 const btnTimes = document.querySelector('.times-btn');
 const navBar = document.getElementById('nav-bar');
-const popupClose = document.getElementById('popup-close');
 
 btnHam.addEventListener('click', function(){
     if(btnHam.className !== ""){
@@ -51,10 +50,10 @@ btnTimes.addEventListener('click', function(){
     }
 })
 
-popupClose.addEventListener('click', function(){
+setTimeout(function(){
     document.getElementById('popup-dialog').style.display = 'none';
-    console.log('close');
-})
+}, 6000);
+
 
 var galleryContainer = document.getElementById("more-gallery");
 var bigGalleryImg = document.getElementById("bigImg")
