@@ -42,6 +42,7 @@ h3 {
 /* POPUP DIALOG */
 .popup-dialog {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 120;
@@ -53,15 +54,15 @@ h3 {
 }
 
 .cookiesContent {
-    width: 320px;
+    width: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
     color: #000;
     text-align: center;
     border-radius: 20px;
     padding: 30px 30px 70px;
+    margin-top: 20px;
 }
 
 button.close {
@@ -78,10 +79,7 @@ button.close {
   width: 82px;
   margin-bottom: 15px;
 }
-.cookiesContent p {
-  margin-bottom: 20px;
-  font-size: 18px;
-}
+
 button.accept {
   cursor: pointer;
   background-color: #1a3283;
@@ -99,6 +97,7 @@ button.accept {
 @media screen and (max-width: 620px) {
     .cookiesContent {
         width: 290px;
+        margin-top: -15em;
     }
 
     .cookiesContent p {
